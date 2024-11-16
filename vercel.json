@@ -10,22 +10,25 @@
       "use": "@vercel/static-build",
       "config": {
         "distDir": "build",
-        "buildCommand": "npm run build"
+        "buildCommand": "cd client && npm install && npm run build"
       }
     }
   ],
   "routes": [
     {
-      "src": "/socket.io/(.*)",
-      "dest": "server/src/server.js"
+      "src": "/api/(.*)",
+      "dest": "/server/src/server.js"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "server/src/server.js"
+      "src": "/socket.io/(.*)",
+      "dest": "/server/src/server.js"
+    },
+    {
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "client/build/$1"
+      "dest": "/client/build/$1"
     }
   ]
 }
